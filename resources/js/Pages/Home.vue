@@ -1,5 +1,5 @@
 <template>
-    <div>
-        <h1 class="text-2xl">Hello</h1>
-    </div>
+    <Head title="Home | " />
+
+    <h1 class="text-2xl">Home page</h1>
 </template>
