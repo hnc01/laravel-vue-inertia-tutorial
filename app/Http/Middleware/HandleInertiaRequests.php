@@ -36,6 +36,8 @@ class HandleInertiaRequests extends Middleware {
         // [ 'field' => 'value' ]
         // by doing {{ $page.props.[field] }}
         return array_merge(parent::share($request), [
+            // Lazy load
+            'auth.user' => fn() => auth()->user() ? $request->user()->only('id', 'name') : null,
         ]);
     }
 }
