@@ -11,7 +11,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('register.store'));
+    form.post(route('register'));
 
     // if we want to clear the whole form (form.reset()) or
     // only some fields in case of error, we can do this
@@ -39,7 +39,7 @@ const submit = () => {
 
             <div>
                 <p class="text-slate-600 mb-2">Already a user?
-                    <Link :href="route('login.show')" class="text-link">Login</Link>
+                    <Link :href="route('login')" class="text-link">Login</Link>
                 </p>
                 <button class="primary-btn" :disabled="form.processing">Register</button>
             </div>

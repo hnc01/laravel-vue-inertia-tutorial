@@ -10,7 +10,8 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('login.store'));
+    // it will figure out that route named login will use post and not the get route
+    form.post(route('login'));
 
     // if we want to clear the whole form (form.reset()) or
     // only some fields in case of error, we can do this
@@ -39,7 +40,7 @@ const submit = () => {
                 </div>
 
                 <p class="text-slate-600">Don't have an account?
-                    <Link :href="route('register.show')" class="text-link">Register</Link>
+                    <Link :href="route('register')" class="text-link">Register</Link>
                 </p>
             </div>
 
