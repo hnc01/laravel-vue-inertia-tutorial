@@ -7,7 +7,7 @@
                 </div>
 
                 <div class="space-x-6">
-                    <Link :href="route('register')" class="nav-link">Register</Link>
+                    <Link :href="route('register.show')" class="nav-link">Register</Link>
                 </div>
             </nav>
         </header>
