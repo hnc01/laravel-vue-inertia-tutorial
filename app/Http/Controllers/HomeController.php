@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller {
     /**
@@ -17,6 +18,10 @@ class HomeController extends Controller {
             })->paginate(5)->withQueryString(),
 
             'searchTerm' => $request->search,
+
+            'can' => [
+                'delete_user' => Auth::user() ? Auth::user()->can('delete', User::class) : null,
+            ]
         ]);
     }
 }
