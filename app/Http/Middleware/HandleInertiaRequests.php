@@ -38,6 +38,7 @@ class HandleInertiaRequests extends Middleware {
         return array_merge(parent::share($request), [
             // Lazy load
             'auth.user' => fn() => auth()->user() ? $request->user()->only('id', 'name', 'avatar') : null,
+            'flash' => ['message' => fn() => $request->session()->get('message')]
         ]);
     }
 }
