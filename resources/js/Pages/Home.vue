@@ -1,9 +1,20 @@
 <script setup>
 import PaginationLinks from "../Components/PaginationLinks.vue";
+import {ref, watch} from "vue";
+import {router} from "@inertiajs/vue3";
+import {debounce} from "lodash";
 
-defineProps({
-    users: Object
-})
+const props = defineProps({
+    users: Object,
+    searchTerm: String
+});
+
+const search = ref(props.searchTerm);
+
+// throttle vs debounce
+// throttle calls the search api after every letter we type with a delay of 1000ms (with accumulation)
+// debounce calls the search api 1000ms after we stop typing
+watch(search, debounce((q) => router.get(route('home'), {search: q}, {preserveState: true}), 500));
 
 // format the dates
 const getDate = (date) => new Date(date).toLocaleDateString("en-us", {
@@ -16,9 +27,13 @@ const getDate = (date) => new Date(date).toLocaleDateString("en-us", {
 <template>
     <Head title="Home | "/>
 
-    <h1 class="text-2xl">Home page</h1>
-
     <div>
+        <div class="flex justify-end mb-4">
+            <div class="w-1/4">
+                <input type="search" placeholder="Search..." v-model="search"/>
+            </div>
+        </div>
+
         <table>
             <thead>
             <tr class="bg-slate-300">
@@ -44,7 +59,7 @@ const getDate = (date) => new Date(date).toLocaleDateString("en-us", {
 
         <!-- Pagination Links-->
         <div>
-            <PaginationLinks :paginator="users" />
+            <PaginationLinks :paginator="users"/>
         </div>
     </div>
 </template>
